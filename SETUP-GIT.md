@@ -5,12 +5,12 @@ https://git-scm.com/downloads
 
 Create a directory to store your source code locally
 ```
-mkdir shopXX
+mkdir nome_do_seu_projeto
 ```
 
 Enter the directory
 ```
-cd shopXX
+cd nome_do_seu_projeto
 ```
 
 Initialize the current directory with git setup
@@ -24,9 +24,12 @@ git config user.name your_name
 git config user.email email@example.com
 ```
 
+Fazer fork do projeto  https://github.com/rkulesza/shop-sweb-2018 para seu repositório 
+Será criado um repositório na sua conta: http://github.com/seu-usuario/shop-sweb-2018
+
 Configure the remote repository locations
 ```
-git remote add origin https://github.com/rkulesza/shopXX.git
+git remote add origin https://github.com/seu_suario/shop-sweb_2018.git
 git remote add shop-samples https://github.com/rkulesza/shop-samples.git
 ```
 > Here, *origin* belongs to you, whereas *shop-samples* are controlled by the teaching team.
