@@ -24,12 +24,13 @@ git config user.name your_name
 git config user.email email@example.com
 ```
 
-Fazer fork do projeto  https://github.com/rkulesza/shop-sweb-2018 para seu repositório 
+Fazer fork do projeto  https://github.com/rkulesza/shop-sweb-2018 para seu repositório.
+
 Será criado um repositório na sua conta: http://github.com/seu-usuario/shop-sweb-2018
 
 Configure the remote repository locations
 ```
-git remote add origin https://github.com/seu_suario/shop-sweb_2018.git
+git remote add origin https://github.com/seu_suario/shop-sweb-2018.git
 git remote add shop-samples https://github.com/rkulesza/shop-samples.git
 ```
 > Here, *origin* belongs to you, whereas *shop-samples* are controlled by the teaching team.
