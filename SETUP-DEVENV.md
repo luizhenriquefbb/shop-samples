@@ -12,6 +12,9 @@ Python 2.7.8
 
 Check if virtualenv is already installed (see the version # returned)
 ```
+$ su - 
+$ apt-get install virtualenv
+$ exit
 $ virtualenv --version
 1.11.6
 ```
