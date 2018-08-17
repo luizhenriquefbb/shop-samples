@@ -26,7 +26,7 @@ git config user.email email@example.com
 
 Configure the remote repository locations
 ```
-git remote add origin https://github.com/rkulesza/shop00.git
+git remote add origin https://github.com/rkulesza/shopXX.git
 git remote add shop-samples https://github.com/rkulesza/shop-samples.git
 ```
 > Here, *origin* belongs to you, whereas *shop-samples* are controlled by the teaching team.
