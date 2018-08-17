@@ -69,7 +69,7 @@ git push --set-upstream origin master
 ```
 > (p.s. You might be prompted for your github username and password)
 
-> So, you've successfully added, committed, and pushed your changes to your remote repository. Verify this by visiting https://github.com/ierg4210/shopXX, which shows your remote contents.
+> So, you've successfully added, committed, and pushed your changes to your remote repository. Verify this by visiting https://github.com/rkulesza/shopXX, which shows your remote contents.
 
 List out all branches, and your current working one.
 ```
@@ -79,7 +79,7 @@ git branch -a
 
 Pull/Download the phase 1 sample code from the teachers' remote repository, "shop-samples"
 ```
-git pull shop-samples phase1
+git pull shop-samples phase1 --allow-unrelated-histories
 ```
 > You'll be prompted to enter a commit message to explain the merge. Using the given one (with a save) will do. 
 
