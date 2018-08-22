@@ -3,17 +3,51 @@
 
 <head>
     <title>Phase1</title>
+    <meta charset="utf-8">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="src/libs/handlebars-v4.0.11.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script id="handlebar" type="text/x-handlebars-template">
+        <div class="left_bar">
+            <div class="left_bar">
+                <ul>
+                    {{#each get_categories}}
+
+                    <li><span>{{this}}</span></li>
+
+                    {{/each}}
+                </ul>
+
+            </div>
+        </div>
+
+        <div id="shop_list">
+            <span class="shop_price" onclick="get_price_total()">aaa</span>
+        </div>
+
+        <div class="paths"></div>
+
+        <div id="list_of_products">
+            <ul>
+                {{#each products}}
+                    <li>
+                        <img class="image" src="{{this.image_src}}" alt="{{this.name}}" onclick="add_to_cart({{@index}})"><br>
+                        <span class="product_name">{{this.name}}</span><br>
+                        <span class="product_price">{{this.price}}</span>
+                    </li>
+            
+                {{/each}}
+            </ul>
+
+        </div>
+    </script>
 </head>
 
 <body>
-    <div class="leftBar"></div>
+    <script src="src/index.js"></script>
 
-    <div id="shopList"></div>
 
-    <div class="paths"></div>
 
-    <div id="list_of_products"></div>
 
 
 </body>

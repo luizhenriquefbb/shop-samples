@@ -1,4 +1,6 @@
-.leftBar {
+
+
+.left_bar {
 	border: solid 1px;
 	display: block;
 	float: left;
@@ -6,9 +8,14 @@
 	height: 758px;
 	position: fixed;
 	top: 142px;
+	overflow: auto;
 }
 
-#shopList {
+.left_bar ul {
+	list-style: none;
+}
+
+#shop_list {
 	border: solid 1px;
 	height: 52px;
 	width: 240px;
@@ -36,6 +43,20 @@
 	width: 80%;
 	height: 668px;
 	top: 222px;
-	position: relative;
+	position: fixed;
 	left: 230px;
+	overflow: auto;
+}
+
+#list_of_products ul {
+	position: relative;
+	display: flex;
+	/*! padding: 0; */
+	flex-direction: row;
+	flex-wrap: wrap;
+	list-style: none;
+}
+
+#list_of_products ul li{
+	margin: 5%;
 }
