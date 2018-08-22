@@ -1,0 +1,19 @@
+{
+  "name": "shop-sample01",
+  "version": "1.0.0",
+  "description": "Atividade referente a cadeira de topcEspecComputador ministrada pelo professor Raoni",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luizhenriquefbb/shop-samples.git"
+  },
+  "author": "luiz henrique freire barros",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luizhenriquefbb/shop-samples/issues"
+  },
+  "homepage": "https://github.com/luizhenriquefbb/shop-samples#readme"
+}

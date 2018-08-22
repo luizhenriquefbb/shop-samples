@@ -1,0 +1,41 @@
+.leftBar {
+	border: solid 1px;
+	display: block;
+	float: left;
+	width: 188px;
+	height: 758px;
+	position: fixed;
+	top: 142px;
+}
+
+#shopList {
+	border: solid 1px;
+	height: 52px;
+	width: 240px;
+	float: right;
+	top: 108px;
+	display: block;
+	position: relative;
+	right: 7px;
+}
+
+.paths {
+	border: solid 1px;
+	height: 50px;
+	position: relative;
+	top: 134px;
+	display: block;
+	width: 21%;
+	float: left;
+	left: 240px;
+}
+
+#list_of_products {
+	border: solid 1px;
+	display: block;
+	width: 80%;
+	height: 668px;
+	top: 222px;
+	position: relative;
+	left: 230px;
+}
