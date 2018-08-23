@@ -26,6 +26,22 @@
 	right: 7px;
 }
 
+#shop_list #shop_list_default {
+	display: block;
+}
+
+#shop_list:hover #shop_list_default {
+	display: none;
+}
+
+#shop_list #shop_list_hover {
+	display: none;
+}
+
+#shop_list:hover #shop_list_hover {
+	display: block;
+}
+
 .paths {
 	border: solid 1px;
 	height: 50px;
