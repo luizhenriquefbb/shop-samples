@@ -8,6 +8,19 @@ Here're some steps to bootstrap your development using git, node.js, and the ama
  4. [Beanstalk setup and deployment](./SETUP-EB.md)
 
 
+Grupo
+--------
+
+
+Grupo | Matrícula
+--------- | ------
+Luiz Henrique  | 11514334
+Aline Moura  | 11512963
+Vicente  | 11505303 
+Caio  | 11502563
+Janyelson | 11409556
+Matheus Monteiro | 11403745
+
 
 Primeira Atividade
 -----------
