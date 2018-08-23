@@ -1,5 +1,5 @@
-template = $('#handlebar').html();
-// var template = String(document.getElementsByTagName("HTML")[0])
+template = $('#handlebar').html(); //using Jquery
+// var template = String(document.getElementsByTagName("HTML")[0]) //vanilla
 // var template = document.getElementsByTagName("#handlebar")[0]
 
 
@@ -34,12 +34,25 @@ binded = {
         return list_of_categories;
     },
 
+    "selected_category": 'category 3',
+
+    /** Return all products of a category  */
+    "get_product_by_category": function () {
+        var that = this;
+        var products_cat = this.products.filter(function (el) {
+            return el.category == that.selected_category;
+        });
+        return products_cat;
+    }
+
 
 }
 
 
-function add_to_cart(product_index) {
-    var product = binded.products[product_index];
+function add_to_cart(product_id) {
+    var product = binded.products.filter(function (el) {
+        return el.id == product_id;
+    })[0];
 
     // check if already exists
     for (let index = 0; index < binded.shop_list.length; index++) {
@@ -55,6 +68,7 @@ function add_to_cart(product_index) {
     refresh_price(get_price_total());
 }
 
+/** To refresh de view */
 function refresh_price(total) {
     var x = document.getElementsByClassName("shop_list_price");
     for (var i = 0; i < x.length; i++) {
@@ -81,6 +95,29 @@ function get_price_total() {
     return total;
 }
 
+
+function select_category(category_index) {
+    binded.selected_category = binded.get_categories()[category_index];
+    refresh_product_list();
+
+    // Refresh selected category
+    document.getElementsByName("selected_category").forEach(function(ele,idx){
+        ele.innerHTML = binded.selected_category;
+    })
+
+}
+
+function refresh_product_list() {
+    var template = $('#handlebar_list_of_products').html();
+    var templateScript = Handlebars.compile(template);
+    var html = templateScript(binded);
+    document.getElementById("list_of_products_ul").innerHTML = html;
+}
+
+
+function go_to_product_page(dictionary) {
+    document.location.href = "product.html?" + JSON.stringify(binded);
+}
 
 //Compile the template data into a function
 var templateScript = Handlebars.compile(template);
