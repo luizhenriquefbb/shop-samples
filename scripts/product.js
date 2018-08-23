@@ -30,7 +30,7 @@ window.onload = function() {
     html += '<li class="product"> <img src="../images/dummy.png"> </li>' + 
     '<li id="description" class="product"> <h3>' + product.productName + '</h3>' +
     '<p> $' + product.price + '<a onclick="addProduct()" href="#"> [Add] </a> </p>' +
-    '<p>' + description + '</p>' +
+    '<p id="textDescription">' + description + '</p>' +
     '</ul>';
     
     html += "</ul>";        

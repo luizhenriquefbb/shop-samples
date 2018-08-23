@@ -68,6 +68,10 @@ li.categories {
   text-align: justify;
 }
 
+#textDescription {
+  margin-right: 20px;
+}
+
 img {
   width:512px;
   height:512px;
