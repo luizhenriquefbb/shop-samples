@@ -19,9 +19,8 @@ ul {
 
 li.products {
   text-align: center;
-  display: inline-block;
-  width: fit-content;
-  padding: 4px;  
+  display: inline-block;;
+  padding: 2px;  
 }
 
 li.categories {
@@ -46,14 +45,14 @@ li.categories {
   border-style: solid;
 }
 
-#shopping-list-hover:hover #chart  {
+#shopping-list-hover:hover > #chart  {
   visibility: visible;
   text-align: center;
   position: absolute;
   top: 8px;
   right: 16px;
   font-size: 14px;
-  background: bisque;
+  background-color: bisque;
   border-style: dashed;
 }
 

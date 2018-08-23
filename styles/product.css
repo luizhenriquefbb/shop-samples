@@ -28,7 +28,6 @@ li.categories {
   display: block;
   padding: 2px;
   font-size: 20px;
-  position: absotule;
 }
 
 #path {
@@ -45,20 +44,21 @@ li.categories {
   border-style: solid;
 }
 
-#shopping-list-hover:hover #chart  {
+#shopping-list-hover:hover > #chart  {
   visibility: visible;
   text-align: center;
   position: absolute;
   top: 8px;
   right: 16px;
   font-size: 14px;
-  background: bisque;
-  border-style: dashed;
+  background-color: bisque;
+  border-style: solid;
 }
 
 #chart {
   visibility: hidden;
   position: absolute;
+  background: bisque;
   top: 8px;
   right: 16px;
   font-size: 14px;
@@ -66,7 +66,6 @@ li.categories {
 
 #description {
   text-align: justify;
-  position: fixed;
 }
 
 img {
