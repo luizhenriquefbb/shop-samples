@@ -1,7 +1,12 @@
-$(function () {
+var data;
+var chart;
+
+ window.onload = function() {
 
 	chart = JSON.parse(sessionStorage.getItem('chart'));
-
+	var productsList = document.getElementById("products-list");
+	var chartElement = document.getElementById("chart");
+	var path = document.getElementById("path");
 	switch (sessionStorage.getItem('category')) {
 		default:
 		case "category1":
@@ -13,7 +18,7 @@ $(function () {
 			];
 
 			sessionStorage.setItem('categoryName', 'Category 1');
-			$("#path").append('<a"> Category 1 </a>');
+			path.innerHTML += '<a"> Category 1 </a>';
 			break;
 		case "category2":
 			data = [
@@ -24,7 +29,7 @@ $(function () {
 			];
 
 			sessionStorage.setItem('categoryName', 'Category 2');
-			$("#path").append('<a"> Category 2 </a>');
+			path.innerHTML += '<a"> Category 2 </a>';
 			break;
 		case "category3":
 			data = [
@@ -35,12 +40,12 @@ $(function () {
 			];
 
 			sessionStorage.setItem('categoryName', 'Category 3');
-			$("#path").append('<a"> Category 3 </a>');
+			path.innerHTML += '<a"> Category 3 </a>';
 			break;
 	}
 
 	loadProducts();
-	if (chart != undefined && chart.length > 0) loadChart();
+	if(chart != undefined && chart.length > 0) loadChart();
 	updateChart();
 
 	function loadProducts() {
@@ -53,7 +58,7 @@ $(function () {
 				'</ul></li>';
 		}
 		html += "</ul>"
-		$('#right-content').append(html);
+		productsList.innerHTML += html;
 	}
 
 	function loadChart() {
@@ -63,12 +68,9 @@ $(function () {
 				chart[i].price + '</p></li>';
 		}
 		html += "<li> <button onclick='checkout()' id='checkout'> Checkout </button> </li></ul>";
-		$('#chart').append(html);
+		chartElement.innerHTML += html;
 	}
-});
-
-var data;
-var chart;
+}
 
 function getProduct(i) {
 	sessionStorage.setItem('product', JSON.stringify(data[i]));
@@ -96,7 +98,7 @@ function updateChart() {
 	for (i = 0; i < chart.length; i++) {
 		price += chart[i].quantity * parseFloat(chart[i].price);
 	}
-	document.getElementById("hopping-list-price").innerHTML = "Shopping List (Total:$" + price.toFixed(2) + ")";
+	document.getElementById("shopping-list-price").innerHTML = "Shopping List (Total:$" + price.toFixed(2) + ")";
 }
 
 function checkout() {

@@ -1,4 +1,4 @@
-$(function(){
+window.onload = function() {
 
   var description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Fusce feugiat tristique nibh vehicula aliquet. Nunc volutpat varius placerat." +
   "Vivamus pretium congue lobortis. Aenean ultrices tortor et tellus hendrerit ultricies." +
@@ -12,10 +12,13 @@ $(function(){
   "Maecenas fermentum erat sit amet venenatis blandit. Aliquam volutpat congue vulputate.";
 
   var category = sessionStorage.getItem('categoryName');
+  var productElement = document.getElementById("product");
+  var chartElement = document.getElementById("chart");
+  var path = document.getElementById("path");
   product = JSON.parse(sessionStorage.getItem('product'));
   chart = JSON.parse(sessionStorage.getItem('chart'));
 
-  $("#path").append('<a href="category.html" > ' + category +'</a> <a> > ' + product.productName + '</a>');
+  path.innerHTML += '<a href="category.html" > ' + category +'</a> <a> > ' + product.productName + '</a>';
 
   loadProduct();
   if(chart != undefined && chart.length > 0) loadChart();
@@ -31,20 +34,19 @@ $(function(){
     '</ul>';
     
     html += "</ul>";        
-    $('#right-content').append(html);
+    productElement.innerHTML += html;
   }
 
-  function loadChart()
-  {
+  function loadChart() {
     var html = "<ul>";
-    for(i = 0; i < chart.length; i++) {   
-      html += '<li"> <p> ' + chart[i].productName + ' <input id="input' + i +'" onchange="setQuantity('+ i +')" value="' + chart[i].quantity + '" type="number">   $' + 
-      chart[i].price + '</p></li>';
+    for (i = 0; i < chart.length; i++) {
+      html += '<li"> <p> ' + chart[i].productName + ' <input id="input' + i + '" onchange="setQuantity(' + i + ')" value="' + chart[i].quantity + '" type="number">   $' +
+        chart[i].price + '</p></li>';
     }
-    html += "<li> <button onclick='checkout()' id='checkout'> Checkout </button> </li></ul>";         
-    $('#chart').append(html);
+    html += "<li> <button onclick='checkout()' id='checkout'> Checkout </button> </li></ul>";
+    chartElement.innerHTML += html;
   }
-});
+}
 
 var data, chart, product;
 
