@@ -17,6 +17,4 @@ app.use(cookieParser());
 app.use('/admin', admin);
 app.use('/',shop);
 
-app.liste(3000);
-
 module.exports = app;
