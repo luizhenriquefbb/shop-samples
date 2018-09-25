@@ -7,3 +7,5 @@ shop03-dev/*
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+**/*.jpg
+database.sqlite3

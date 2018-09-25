@@ -4,9 +4,8 @@ var exphbs = require('express-handlebars');
 var bodyParser = require('body-parser');
 var multer = require('multer');
 
-console.log("Comasdasdasd");
 
-//var shop = require('./routes/index');
+
 var admin = require('./routes/admin');
 
 app.engine('handlebars',exphbs({defaultLayout: 'layout'}));
@@ -19,6 +18,6 @@ app.use(multer({ dest: 'public/tmp'}));
 app.use(express.static('public'));
 
 app.use('/admin', admin);
-//app.use('/',shop);
+app.use('/',admin);
 
 module.exports = app;
