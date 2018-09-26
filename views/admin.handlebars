@@ -39,12 +39,12 @@
 			</form>
 
 
-		<h2>Categories</h2>
+		<h2>Categorias</h2>
 		<ul>
 			{{#each categories}}
 			<li><p>{{this.categoryName}}</p></li>
-			<li><a href="admin/categories/{{this.id}}/destroy">Destroy</a>
-					<a href="admin/categories/{{this.id}}/edit">Edit</a>
+			<li><a href="admin/categories/{{this.id}}/destroy">Deletar</a>
+					<a href="admin/categories/{{this.id}}/edit">Editar</a>
 			</li>
 			<ul>
 				{{#each this.Products}}
@@ -52,8 +52,8 @@
 						<img src="/tmp/{{this.productImage}}"><p>{{this.productName}}</p><br><p>${{this.productPrice}}</p><br><p>{{this.productDesc}}</p><br><p>{{this.productImage}}</p>
 					</li>
 					<li>
-						<a href="admin/categories/{{../this.id}}/products/{{this.id}}/destroy">Destroy</a>
-						<a href="admin/categories/{{../this.id}}/products/{{this.id}}/edit">Edit</a>
+						<a href="admin/categories/{{../this.id}}/products/{{this.id}}/destroy">Deletar</a>
+						<a href="admin/categories/{{../this.id}}/products/{{this.id}}/edit">Editar</a>
 					</li>
 				{{/each}}
 			</ul>
