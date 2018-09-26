@@ -1,11 +1,4 @@
 node_modules/*
 .DS_Store
-backup.sql
-password
-shop03-dev/*
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
-**/*.jpg
+public/tmp/*
 database.sqlite3
