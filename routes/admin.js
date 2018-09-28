@@ -2,25 +2,70 @@ var models = require('../models');
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function(req, res){
 
-  console.log("get all categories");
+//Primeira rota
+router.get('/', function(req, res, next){
 
+  //Verificar, pela sessão, se o usuario esta logado
+  if(req.session == undefined || !req.session.logado) {
+    res.render('login');
+  }
+  else {
+    if(req.session.isAdmin)
+      res.redirect('/admin');
+    else {
+      res.send('<script> alert("Você não é administrador") </script>');    
+    }
+  }
+});
+
+//Rota quando o administrador estiver logado
+router.get('/admin', function(req, res){
+
+  //Encontrar todas as categorias e da join com a tabela de produtos
 	models.Category.findAll({
 		include: [ models.Product ]
 	}).then(function(categories) {
     console.log("get render");
-		res.render('admin',{
-			categories: categories
+		res.render('admin',{ //Renderizar o admin.handlebars
+			categories: categories //Produto esta dentro das categorias
 		});
-	});
+  });
+  
+
 });
 
-//categories
-//handle create new category form
+//Rota de login
+router.post('/login', function(req, res) {
+  
+  if (req.param('username')){
+      models.User.find({
+      where: {username: req.param('username'), password: req.param('password')} //Busca pelo usuario com mesmo username e password
+      
+    }).then(function(user){
+
+      //Garante que encontrou o usuario
+      if(user && user.isAdmin) {
+        //Salva na sessao as credenciais do usuario
+        req.session.id = user.id;
+        req.session.username = user.username;
+        req.session.isAdmin = user.isAdmin;
+        req.session.logado = true;
+        res.redirect('/admin');
+      }
+      else {
+        res.redirect('/');
+        res.send('<script> alert("Você não é administrador") </script>');    
+      }
+    })
+  }
+
+});
+
+//Rota para criar uma categoria
 router.post('/categories/create', function(req, res) {
   if (req.param('categoryName')){
-    models.Category.create({
+    models.Category.create({ //Criar uma categoria com a categoryName
       categoryName: req.param('categoryName')
     }).then(function() {
       res.redirect('/admin');
@@ -28,13 +73,12 @@ router.post('/categories/create', function(req, res) {
   }
 });
 
-//create new product
+//Rota para criar um produto
 router.post('/categories/createproduct', function(req, res){
-  models.Category.find({
+  models.Category.find({ //Encontra a categoria selecionada no form
     where: { categoryName: req.body.productCategory }
   }).then(function(category){
-    console.log("thumb: " + req.files.thumbnail);
-    models.Product.create({
+    models.Product.create({ //Cria produto com as informações passadas pelo form
       productName: req.body.productName,
       productPrice: req.body.productPrice,
       productDesc: req.body.productDesc,
@@ -48,19 +92,19 @@ router.post('/categories/createproduct', function(req, res){
   //}
 });
 
-//edit category
+//Editar categoria
 router.route('/categories/:category_id/edit').get(function(req, res){
   models.Category.find({
     where: {id: req.param('category_id')},
     include: [models.Product]
-  }).then(function(category){
+  }).then(function(category){ //Renderiza a pagina para editar a categoria
     res.send('<form action="", method="post"/>'
             +'<label>Name:</label>'
             +'<input type="text", name="categoryName" value=\"'+ category.categoryName +'\" >'
             +'<input type="submit"/>'
             +'</form>');
     });
-  }).post(function(req, res){
+  }).post(function(req, res){ //Edita a categoria a partir das informações da pagina renderizada
     models.Category.find({where: {id: req.param('category_id')}}).then(function(category){
       category.updateAttributes({
       categoryName: req.body.categoryName
@@ -69,9 +113,9 @@ router.route('/categories/:category_id/edit').get(function(req, res){
 });
 
 
-//delete category
+//Deletar categoria
 router.get('/categories/:category_id/destroy',function(req, res) {
-  models.Category.find({
+  models.Category.find({//Encontrar e Deletar categoria com o ID da categoria
     where: {id: req.param('category_id')},
     include: [models.Product]
   }).then(function(category) {
@@ -85,18 +129,17 @@ router.get('/categories/:category_id/destroy',function(req, res) {
   });
 });
 
-//edit product
+//Editar produto
 router.route('/categories/:category_id/products/:product_id/edit').get(function(req, res){
-  models.Category.find({
+  models.Category.find({ //Encontrar categoria do produto
     where: {id: req.param('category_id')}
   }).then(function(category){
-    models.Product.find({
+    models.Product.find({//Encontrar produto
       where: {id: req.param('product_id')}
-    }).then(function(product){
+    }).then(function(product){ //REndenrizar pagina para editar produto
       models.Category.findAll({include: [ models.Product ]}).then(function(categories){
         var optionText = "";
         for(var i=0;i<categories.length;i++){
-          //console.log("+++"+categories[i].categoryName);
           optionText += '<option value="'
                             +categories[i].categoryName
                             +'">'
@@ -121,7 +164,7 @@ router.route('/categories/:category_id/products/:product_id/edit').get(function(
       });
     });
   });
-}).post(function(req, res){
+}).post(function(req, res){ //Edita o produto de acordo com as informações passadas pela pagina
   models.Category.find({
     where: { id: req.param('category_id') }
   }).then(function(category) {
@@ -149,12 +192,12 @@ router.route('/categories/:category_id/products/:product_id/edit').get(function(
   });
 });
 
-//delete product
+//Deletar produto
 router.get('/categories/:category_id/products/:product_id/destroy', function (req, res) {
-  models.Category.find({
+  models.Category.find({ //Encontrar categoria do produto
     where: { id: req.param('category_id') }
   }).then(function(category) {
-    models.Product.find({
+    models.Product.find({ //Encontrar produto para deletar
       where: { id: req.param('product_id') }
     }).then(function(product) {
       product.setCategory(null).then(function() {
@@ -166,8 +209,9 @@ router.get('/categories/:category_id/products/:product_id/destroy', function (re
   });
 });
 
+//Rota para redirencionar usuario caso mande um url errada
 router.get('/*', function(req, res){
-  res.redirect('/admin');
+  res.redirect('/');
 });
 
 module.exports = router;
