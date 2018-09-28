@@ -2,3 +2,5 @@ node_modules/*
 .DS_Store
 public/tmp/*
 database.sqlite3
+local-dev-env/*
+.vscode*
