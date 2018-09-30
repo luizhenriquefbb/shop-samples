@@ -62,6 +62,27 @@ router.post('/login', function(req, res) {
 
 });
 
+router.route('/signup').get(function(req, res) {
+  
+  res.send('<form action="", method="post"/>'
+            +'<label>Name:</label>'
+            +'<input type="text", name="username" >'
+            +'<label>Email:</label>'
+            +'<input type="text", name="email" >'
+            +'<label>Password:</label>'
+            +'<input type="password", name="password" >'
+            +'<input type="submit"/>'
+            +'</form>');
+
+}).post(function(req, res){ //Edita a categoria a partir das informações da pagina renderizada
+  models.User.create({ //Cria produto com as informações passadas pelo form
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password,
+    isAdmin: true
+  }).then(function(){res.redirect('/login');});
+});
+
 //Rota para criar uma categoria
 router.post('/categories/create', function(req, res) {
   if (req.param('categoryName')){
