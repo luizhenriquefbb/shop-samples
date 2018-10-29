@@ -30,6 +30,6 @@ app.use(multer({ dest: 'public/tmp'}));
 app.use(express.static('public'));
 
 //Configurar rotas admin
-app.use('/', admin);
+app.use('/admin', admin);
 
 module.exports = app;

@@ -12,7 +12,7 @@ router.get('/', function(req, res, next){
   }
   else {
     if(req.session.isAdmin)
-      res.redirect('/admin');
+      res.redirect('admin/home');
     else {
       res.send('<script> alert("Você não é administrador") </script>');    
     }
@@ -20,7 +20,7 @@ router.get('/', function(req, res, next){
 });
 
 //Rota quando o administrador estiver logado
-router.get('/admin', function(req, res){
+router.get('/home', function(req, res){
 
   //Encontrar todas as categorias e da join com a tabela de produtos
 	models.Category.findAll({
@@ -50,10 +50,10 @@ router.post('/login', function(req, res) {
         req.session.username = user.username;
         req.session.isAdmin = user.isAdmin;
         req.session.logado = true;
-        res.redirect('/admin');
+        res.redirect('admin/home');
       }
       else {
-        res.redirect('/');
+        res.redirect('admin/');
         res.send('<script> alert("Você não é administrador") </script>');    
       }
     })
@@ -79,18 +79,17 @@ router.route('/signup').get(function(req, res) {
     email: req.body.email,
     password: req.body.password,
     isAdmin: true
-  }).then(function(){res.redirect('/login');});
+  }).then(function(){res.redirect('/admin/login');});
 });
 
 //Rota para criar uma categoria
 router.post('/categories/create', function(req, res) {
 
-  console.log("TaasdasdasdasdasdasdasdasdasdaFNSGBNSFJSDBNFAFKNFSADSA");
   if (req.param('categoryName')){
     models.Category.create({ //Criar uma categoria com a categoryName
       categoryName: req.param('categoryName')
     }).then(function() {
-      res.redirect('/admin');
+      res.redirect('admin/home');
     });
   }
 });
@@ -107,7 +106,7 @@ router.post('/categories/createproduct', function(req, res){
       productImage: req.files.thumbnail.name
   }).then(function(product){
       product.setCategory(category).then(function() {
-        res.redirect('/admin');
+        res.redirect('admin/home');
       });
     });
   });
@@ -130,7 +129,7 @@ router.route('/categories/:category_id/edit').get(function(req, res){
     models.Category.find({where: {id: req.param('category_id')}}).then(function(category){
       category.updateAttributes({
       categoryName: req.body.categoryName
-    }).then(function(){res.redirect('/admin');});
+    }).then(function(){res.redirect('admin/home');});
   });
 });
 
@@ -145,7 +144,7 @@ router.get('/categories/:category_id/destroy',function(req, res) {
       {where: {CategoryId: category.id}}
     ).then(function(affectedRows) {
       category.destroy().then(function() {
-        res.redirect('/admin');
+        res.redirect('admin/home');
       });
     });
   });
@@ -207,7 +206,7 @@ router.route('/categories/:category_id/products/:product_id/edit').get(function(
         }).then(function(category2){
           product.setCategory(category2);
         }).then(function() {
-          res.redirect('/admin');
+          res.redirect('admin/home');
         });
       });
     });
@@ -224,7 +223,7 @@ router.get('/categories/:category_id/products/:product_id/destroy', function (re
     }).then(function(product) {
       product.setCategory(null).then(function() {
         product.destroy().then(function() {
-          res.redirect('/admin');
+          res.redirect('admin/home');
         });
       });
     });
@@ -233,7 +232,7 @@ router.get('/categories/:category_id/products/:product_id/destroy', function (re
 
 //Rota para redirencionar usuario caso mande um url errada
 router.get('/*', function(req, res){
-  res.redirect('/');
+  res.redirect('/admin');
 });
 
 module.exports = router;
