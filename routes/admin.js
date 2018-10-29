@@ -26,7 +26,6 @@ router.get('/admin', function(req, res){
 	models.Category.findAll({
 		include: [ models.Product ]
 	}).then(function(categories) {
-    console.log("get render");
 		res.render('admin',{ //Renderizar o admin.handlebars
 			categories: categories //Produto esta dentro das categorias
 		});
@@ -85,6 +84,8 @@ router.route('/signup').get(function(req, res) {
 
 //Rota para criar uma categoria
 router.post('/categories/create', function(req, res) {
+
+  console.log("TaasdasdasdasdasdasdasdasdasdaFNSGBNSFJSDBNFAFKNFSADSA");
   if (req.param('categoryName')){
     models.Category.create({ //Criar uma categoria com a categoryName
       categoryName: req.param('categoryName')

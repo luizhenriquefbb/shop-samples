@@ -14,10 +14,13 @@
     "cookie-parser": "^1.4.3",
     "express": "4.x",
     "express-handlebars": "^1.2.2",
+    "express-react-views": "^0.10.5",
     "express-session": "^1.15.6",
     "fs": "0.0.1-security",
     "multer": "^0.1.8",
     "path": "^0.12.7",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0",
     "sequelize": "^2.0.0-rc1",
     "sqlite3": "^4.0.2"
   }

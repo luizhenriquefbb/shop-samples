@@ -1,11 +1,11 @@
 var express = require('express');
 var app = express();
-var exphbs = require('express-handlebars');
 var bodyParser = require('body-parser');
 var multer = require('multer');
 var cookieParser = require('cookie-parser');
 var session  = require('express-session');
-var RedisStore = require('connect-redis')(session);
+const path = require('path');
+const { createEngine } = require('express-react-views');
 
 // Configurar sessao para os usuarios   
 app.use(session({
@@ -15,11 +15,12 @@ app.use(session({
     cookie: { maxAge: 6000000 } }));
 
 
+app.set('views', path.resolve('./views'));
+app.set('view engine', 'jsx'); 
+app.engine('jsx', createEngine()); 
+
 //Adicionar rota admin
 var admin = require('./routes/admin');
-
-app.engine('handlebars',exphbs({defaultLayout: 'layout'}));
-app.set('view engine', 'handlebars');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
