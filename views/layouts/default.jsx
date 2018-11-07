@@ -8,6 +8,7 @@ class DefaultLayout extends React.Component {
             <title>Compras Online</title>
             <script src="/js/jquery-1.11.2.min.js"></script>
             <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+            <link rel="stylesheet" type="text/css" href="/css/index.css"/>
             <script type="text/javascript" src="/js/main.js"></script>
 
             <link rel="stylesheet" href="/css/fontawesome.min.css"/>
@@ -15,13 +16,13 @@ class DefaultLayout extends React.Component {
         </head>
         <body>
             <header className="cabecalho">
-                <h1 class="logo">
+                <h1 className="logo">
                     <a href='../'>Compras Online</a>
                     <p>Produtos de várias categorias</p>
                 </h1>
             </header>
 
-            <main class="principal">
+            <main className="principal">
                 {this.props.children}
             </main>
         </body>

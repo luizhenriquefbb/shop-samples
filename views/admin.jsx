@@ -60,7 +60,7 @@ export default class Admin extends React.Component {
                                                     <li>
                                                         <img src={"/tmp/" + product.productImage}/>
                                                         <p>{product.productName}</p><br/>
-                                                        <p>${product.productPrice}</p><br/>
+                                                        <p>R${product.productPrice}</p><br/>
                                                         <p>{product.productDesc}</p><br/>
                                                         <p>{product.productImage}</p>
                                                     </li>

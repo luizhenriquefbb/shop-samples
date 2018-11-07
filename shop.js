@@ -19,8 +19,8 @@ app.set('views', path.resolve('./views'));
 app.set('view engine', 'jsx'); 
 app.engine('jsx', createEngine()); 
 
-//Adicionar rota admin
 var admin = require('./routes/admin');
+var index = require('./routes/index');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -29,7 +29,7 @@ app.use(multer({ dest: 'public/tmp'}));
 
 app.use(express.static('public'));
 
-//Configurar rotas admin
 app.use('/admin', admin);
+app.use('/', index);
 
 module.exports = app;

@@ -1,10 +1,10 @@
 var React = require('react');
-var DefaultLayout = require('./layouts/default');
+var DefaultAdminLayout = require('./layouts/defaultAdmin');
 
 export default class Login extends React.Component {
   render() {
     return (
-        <DefaultLayout>
+        <DefaultAdminLayout>
             <div class="content">
                 <h2> Login </h2>
                 <form action="admin/login" enctype="multipart/form-data" method="post">
@@ -18,7 +18,7 @@ export default class Login extends React.Component {
                     <input type="submit" value="Cadastrar"/>
                 </form>
             </div>
-        </DefaultLayout>
+        </DefaultAdminLayout>
     );
   }
 }
