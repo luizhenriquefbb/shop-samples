@@ -10,7 +10,7 @@ export default class Admin extends React.Component {
     render() {
         return ( 
             <DefaultAdminLayout>
-                <div class="content">
+                <div className="content">
                     <h2>Criar uma nova categoria</h2>
                     <form action="categories/create" method="post">
                         <label>Nome:</label>
@@ -19,7 +19,7 @@ export default class Admin extends React.Component {
                     </form>
 
                     <h2>Criar um novo produto</h2>
-                    <form action="categories/createproduct" enctype="multipart/form-data" method="post">
+                    <form action="categories/createproduct" encType="multipart/form-data" method="post">
                         <label>Nome:</label>
                         <input type="text" name="productName" required="required"/><br/>
                         

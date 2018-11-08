@@ -3,8 +3,20 @@ var express = require('express');
 var router = express.Router();
 
 
-router.get('/', function(req, res){
+//Primeira rota
+router.get('/', function(req, res, next){
 
+    //Verificar, pela sessão, se o usuario esta logado
+    verifySession(req, res, next);
+  
+    res.redirect('/home');
+
+});
+
+router.get('/home', function(req, res, next){
+
+    verifySession(req, res);
+    
 	models.Category.findAll({
 		include: [ models.Product ]
 	}).then(function(categories) {
@@ -14,7 +26,61 @@ router.get('/', function(req, res){
     });
 });
 
-router.get('/categories/:category_id/products/:product_id', function (req, res) {
+router.get('/login', function(req, res, next){
+    res.render('login');
+});
+  
+  
+//Rota de login
+router.post('/signin', function(req, res) {
+    
+    if (req.param('username')){
+        models.User.find({
+        where: {username: req.param('username'), password: req.param('password')} //Busca pelo usuario com mesmo username e password
+        
+      }).then(function(user){
+  
+        //Garante que encontrou o usuario
+        if(user) {
+          //Salva na sessao as credenciais do usuario
+          req.session.id = user.id;
+          req.session.username = user.username;
+          req.session.isAdmin = user.isAdmin;
+          req.session.logado = true;
+          res.redirect('home');
+        }
+        else {
+          res.redirect('/login');  
+        }
+      })
+    }
+  
+});
+  
+router.route('/signup').get(function(req, res) {
+    
+    res.send('<form action="", method="post"/>'
+              +'<label>Name:</label>'
+              +'<input type="text", name="username" >'
+              +'<label>Email:</label>'
+              +'<input type="text", name="email" >'
+              +'<label>Password:</label>'
+              +'<input type="password", name="password" >'
+              +'<input type="submit"/>'
+              +'</form>');
+  
+  }).post(function(req, res){ //Edita a categoria a partir das informações da pagina renderizada
+    models.User.create({ //Cria produto com as informações passadas pelo form
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+      isAdmin: false
+    }).then(function(){res.redirect('/login');});
+});
+
+router.get('/categories/:category_id/products/:product_id', function (req, res, next) {
+
+    verifySession(req, res, next);
 
     models.Category.findAll({
 		include: [ models.Product ]
@@ -35,7 +101,9 @@ router.get('/categories/:category_id/products/:product_id', function (req, res) 
     });
 });
 
-router.get('/categories/:category_id',function(req, res) {
+router.get('/categories/:category_id',function(req, res, next) {
+
+    verifySession(req, res, next);
 
     models.Category.findAll({
 		include: [ models.Product ]
@@ -52,9 +120,11 @@ router.get('/categories/:category_id',function(req, res) {
     });
 });
 
-//Rota para redirencionar usuario caso mande um url errada
-router.get('/*', function(req, res){
-  res.redirect('/');
-});
+function verifySession(req, res, next) {
+    if(req.session == undefined || !req.session.logado) {
+      res.redirect('/login');
+      next();
+    }
+}
 
 module.exports = router;

@@ -7,20 +7,20 @@ var router = express.Router();
 router.get('/', function(req, res, next){
 
   //Verificar, pela sessão, se o usuario esta logado
-  if(req.session == undefined || !req.session.logado) {
-    res.render('login');
-  }
+  verifySession(req, res);
+
+  if(req.session.isAdmin)
+    res.redirect('admin/home');
   else {
-    if(req.session.isAdmin)
-      res.redirect('admin/home');
-    else {
-      res.send('<script> alert("Você não é administrador") </script>');    
-    }
+    res.send('<script> alert("Você não é administrador") </script>');    
   }
+  
 });
 
 //Rota quando o administrador estiver logado
 router.get('/home', function(req, res){
+
+  verifySession(req, res);
 
   //Encontrar todas as categorias e da join com a tabela de produtos
 	models.Category.findAll({
@@ -30,12 +30,16 @@ router.get('/home', function(req, res){
 			categories: categories //Produto esta dentro das categorias
 		});
   });
-  
-
 });
 
+
+router.get('/login', function(req, res, next){
+  res.render('loginAdmin');
+});
+
+
 //Rota de login
-router.post('/login', function(req, res) {
+router.post('/signinAdmin', function(req, res) {
   
   if (req.param('username')){
       models.User.find({
@@ -53,8 +57,8 @@ router.post('/login', function(req, res) {
         res.redirect('admin/home');
       }
       else {
-        res.redirect('admin/');
-        res.send('<script> alert("Você não é administrador") </script>');    
+        res.redirect('admin/login');
+        //res.send('<script> alert("Você não é administrador") </script>');    
       }
     })
   }
@@ -85,6 +89,8 @@ router.route('/signup').get(function(req, res) {
 //Rota para criar uma categoria
 router.post('/categories/create', function(req, res) {
 
+  verifySession(req, res);
+
   if (req.param('categoryName')){
     models.Category.create({ //Criar uma categoria com a categoryName
       categoryName: req.param('categoryName')
@@ -96,6 +102,9 @@ router.post('/categories/create', function(req, res) {
 
 //Rota para criar um produto
 router.post('/categories/createproduct', function(req, res){
+
+  verifySession(req, res);
+
   models.Category.find({ //Encontra a categoria selecionada no form
     where: { categoryName: req.body.productCategory }
   }).then(function(category){
@@ -115,6 +124,9 @@ router.post('/categories/createproduct', function(req, res){
 
 //Editar categoria
 router.route('/categories/:category_id/edit').get(function(req, res){
+
+  verifySession(req, res);
+
   models.Category.find({
     where: {id: req.param('category_id')},
     include: [models.Product]
@@ -136,6 +148,9 @@ router.route('/categories/:category_id/edit').get(function(req, res){
 
 //Deletar categoria
 router.get('/categories/:category_id/destroy',function(req, res) {
+
+  verifySession(req, res);
+
   models.Category.find({//Encontrar e Deletar categoria com o ID da categoria
     where: {id: req.param('category_id')},
     include: [models.Product]
@@ -152,6 +167,9 @@ router.get('/categories/:category_id/destroy',function(req, res) {
 
 //Editar produto
 router.route('/categories/:category_id/products/:product_id/edit').get(function(req, res){
+
+  verifySession(req, res);
+
   models.Category.find({ //Encontrar categoria do produto
     where: {id: req.param('category_id')}
   }).then(function(category){
@@ -215,6 +233,9 @@ router.route('/categories/:category_id/products/:product_id/edit').get(function(
 
 //Deletar produto
 router.get('/categories/:category_id/products/:product_id/destroy', function (req, res) {
+
+  verifySession(req, res);
+
   models.Category.find({ //Encontrar categoria do produto
     where: { id: req.param('category_id') }
   }).then(function(category) {
@@ -234,5 +255,12 @@ router.get('/categories/:category_id/products/:product_id/destroy', function (re
 router.get('/*', function(req, res){
   res.redirect('/admin');
 });
+
+function verifySession(req, res) {
+  if(req.session == undefined || !req.session.logado || !req.session.isAdmin) {
+    res.redirect('admin/login');
+    return;
+  }
+}
 
 module.exports = router;

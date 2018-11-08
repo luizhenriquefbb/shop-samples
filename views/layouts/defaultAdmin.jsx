@@ -16,13 +16,13 @@ class DefaultAdminLayout extends React.Component {
         </head>
         <body>
             <header className="cabecalho">
-                <h1 class="logo">
+                <h1 className="logo">
                     <a href='../'>Compras Online</a>
                     <p>Produtos de várias categorias</p>
                 </h1>
             </header>
 
-            <main class="principal">
+            <main className="principal">
                 {this.props.children}
             </main>
         </body>

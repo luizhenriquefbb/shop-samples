@@ -1,13 +1,13 @@
 var React = require('react');
 var DefaultAdminLayout = require('./layouts/defaultAdmin');
 
-export default class Login extends React.Component {
+export default class LoginAdmin extends React.Component {
   render() {
     return (
         <DefaultAdminLayout>
             <div className="content">
                 <h2> Login </h2>
-                <form action="signin" encType="multipart/form-data" method="post">
+                <form action="signinAdmin" encType="multipart/form-data" method="post">
                     <label>Usuario:</label>
                     <input type="text" name="username" required="required"/>
                     <label>Password:</label>
