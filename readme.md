@@ -34,3 +34,16 @@ Segunda atividade
 ---------
 
 ![](images/descricao_atividade2.png)
+
+
+Apresentação final
+----------
+
+Seguem itens que serão avaliados na apresentação final da disciplina na sexta-feira (09/11):
+
+1. Implementar CRUD para categorias e produtos;
+2. Implementar login e gerenciamento de sessão para dois tipos de usuários
+3. As sessões devem ser armazenadas em um banco diferentes dos produtos (sugestão de usar Redis);
+4. Admin pode gerenciar CRUDs
+5. User comum só visualiza produtos.
+6. Depois de implementar itens de  1 a 5 em Node.Js (geração de telas no servidor), implementar as telas que conseguir em React (geração de telas no cliente) e fazer comunicação com o servidor com Json (sugestão de usar a lib axios do React).
