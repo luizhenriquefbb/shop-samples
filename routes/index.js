@@ -15,7 +15,7 @@ router.get('/', function(req, res, next){
 
 router.get('/home', function(req, res, next){
 
-    verifySession(req, res);
+    verifySession(req, res, next);
     
 	models.Category.findAll({
 		include: [ models.Product ]
@@ -55,6 +55,38 @@ router.post('/signin', function(req, res) {
       })
     }
   
+});
+
+
+router.get('/logout', function (req, res) {
+    console.log('fazendo logout');
+    
+    if (req.session != undefined && req.session.logado) {
+        req.session.id = "";
+        req.session.username = "";
+        req.session.isAdmin = false;
+        req.session.logado = false;
+        res.redirect('home');
+        
+    }
+
+    // if (req.param('username')){
+    //     models.User.find({
+    //     where: {username: req.param('username'), password: req.param('password')} //Busca pelo usuario com mesmo username e password
+
+    //   }).then(function(user){
+
+    //     //Garante que encontrou o usuario
+    //     if(user) {
+    //       //Salva na sessao as credenciais do usuario
+
+    //     }
+    //     else {
+    //       res.redirect('/login');  
+    //     }
+    //   })
+    // }
+
 });
   
 router.route('/signup').get(function(req, res) {

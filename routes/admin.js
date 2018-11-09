@@ -65,6 +65,20 @@ router.post('/signinAdmin', function(req, res) {
 
 });
 
+
+router.get('/logout', function (req, res) {
+  console.log('fazendo logout');
+  
+  if (req.session != undefined && req.session.logado) {
+      req.session.id = "";
+      req.session.username = "";
+      req.session.isAdmin = false;
+      req.session.logado = false;
+      res.redirect('home');
+      
+  }
+});
+
 router.route('/signup').get(function(req, res) {
   
   res.send('<form action="", method="post"/>'

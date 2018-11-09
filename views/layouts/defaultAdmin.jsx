@@ -25,6 +25,10 @@ class DefaultAdminLayout extends React.Component {
             <main className="principal">
                 {this.props.children}
             </main>
+
+            <form action="logout" method="get">
+                <input type="submit" value="logout" className="logout" />
+            </form>
         </body>
       </html>
     );

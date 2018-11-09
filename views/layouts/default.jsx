@@ -20,6 +20,12 @@ class DefaultLayout extends React.Component {
                     <a href='../'>Compras Online</a>
                     <p>Produtos de várias categorias</p>
                 </h1>
+               
+                {/* <a href="/logout">logout</a> */}
+
+                <form action="logout" method="get">
+                    <input type="submit" value="logout" className="logout"/>
+                </form>
             </header>
 
             <main className="principal">
