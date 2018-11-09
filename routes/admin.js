@@ -109,9 +109,9 @@ router.post('/categories/createproduct', function(req, res){
     where: { categoryName: req.body.productCategory }
   }).then(function(category){
     models.Product.create({ //Cria produto com as informações passadas pelo form
-      productName: req.body.productName,
+      productName:  req.body.productName,
       productPrice: req.body.productPrice,
-      productDesc: req.body.productDesc,
+      productDesc:  req.body.productDesc,
       productImage: req.files.thumbnail.name
   }).then(function(product){
       product.setCategory(category).then(function() {

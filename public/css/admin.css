@@ -1,9 +1,9 @@
 .content {
 	padding: 15px 0 0 15px;
 }
-.content img {
+/* .content img {
 	width: 100px;
-}
+} */
 
 .content ul {
 	padding: 2em;
@@ -13,14 +13,21 @@
 	padding: 4px;
 	margin: 4px;
 }
+
 .content form {
 	text-align: left;
 	padding: 15px;
 }
 
+.input-password {
+	border: solid 1px;
+	margin: 28px 0;
+}
+
 .content textarea {
 	border: 1px solid black;
 	padding: 15px;
+	width: 100%;
 }
 
 .content input[type="text"] {
@@ -28,7 +35,7 @@
 	margin: 15px 0 0 15px;
 }
 
-.content img {
+/* .content img {
 	width: 50%;
-}
+} */
 

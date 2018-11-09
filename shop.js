@@ -1,10 +1,10 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-var multer = require('multer');
-var cookieParser = require('cookie-parser');
-var session  = require('express-session');
-const path = require('path');
+var express            = require('express');
+var app                = express();
+var bodyParser         = require('body-parser');
+var multer             = require('multer');
+var cookieParser       = require('cookie-parser');
+var session            = require('express-session');
+const path             = require('path');
 const { createEngine } = require('express-react-views');
 
 // Configurar sessao para os usuarios   

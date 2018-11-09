@@ -63,3 +63,24 @@ p {
   font-size: 2em;
 }
 
+.separador {
+	height: 2px;
+	border: solid 1px;
+	width: 87%;
+	margin: 19px auto;
+}
+
+.list-products {
+  width:256px;
+  /* height:256px; */
+  align-self: center;
+}
+
+.product-info img.list-products {
+	margin: 0 37%;
+	position: relative;
+}
+
+li.li-clean {
+	border: none !important;
+}

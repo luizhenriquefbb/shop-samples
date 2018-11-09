@@ -18,6 +18,9 @@ export default class Admin extends React.Component {
                         <button type='submit' className='btn btn-primary'>Submit</button>
                     </form>
 
+                    <div className="separador"></div>
+
+
                     <h2>Criar um novo produto</h2>
                     <form action="categories/createproduct" encType="multipart/form-data" method="post">
                         <label>Nome:</label>
@@ -26,30 +29,35 @@ export default class Admin extends React.Component {
                         <label>Preço: R$ </label>
                         <input type="text" name="productPrice" required="required"/><br/>
                         
-                        <label>Descrição:</label><br/>
-                        <textarea name="productDesc" required="required"></textarea><br/>
+                        <div style={{"margin": "23px 0"}}>
+                            <label>Descrição:</label><br/>
+                            <textarea name="productDesc" required="required"></textarea><br/>
+                        </div>
                         
                         <label>Imagem:</label>
                         <input type="file" name="thumbnail" required="required"/>
                         
                         <select name="productCategory">
-                            {this.props.categories.map((category, i) => {     
-        
+                            {this.props.categories.map((category, i) => {
                                 return (<option value={category.categoryName}>{category.categoryName}</option>) 
                             })}
                         </select>
                         <input type="submit"/>
                     </form>
 
-                    <h2>Categorias</h2>
+                    <div className="separador"></div>
+
+                    
+                    <h2>Gerenciamento</h2>
                     <ul>
                         {this.props.categories.map((category, i) => {     
             
                             return (
                                 <div>
                                     <li><p>{category.categoryName}</p></li>
-                                    <li>
+                                    <li className="li-clean">
                                         <a href={"categories/" + category.id + "/destroy"}>Deletar</a>
+                                        <span> | </span>
                                         <a href={"categories/" + category.id + "/edit"}>Editar</a>
                                     </li>
                                     <ul>
@@ -57,17 +65,19 @@ export default class Admin extends React.Component {
                 
                                             return (
                                                 <div>
-                                                    <li>
-                                                        <img src={"/tmp/" + product.productImage}/>
+                                                    <li className="product-info">
+                                                        <img src={"/tmp/" + product.productImage} className="list-products"/>
                                                         <p>{product.productName}</p><br/>
                                                         <p>R${product.productPrice}</p><br/>
                                                         <p>{product.productDesc}</p><br/>
                                                         <p>{product.productImage}</p>
                                                     </li>
-                                                    <li>
+                                                    <li className="li-clean" >
                                                         <a href={"categories/" + category.id + "/products/" + product.id + "/destroy"}>Deletar</a>
+                                                        <span> | </span>
                                                         <a href={"categories/" + category.id + "/products/" + product.id + "/edit"}>Editar</a>
                                                     </li>
+                                                        <div className="separador"></div>
                                                 </div>
                                             ); 
                                         })}

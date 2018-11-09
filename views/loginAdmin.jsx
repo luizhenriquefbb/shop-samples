@@ -8,10 +8,14 @@ export default class LoginAdmin extends React.Component {
             <div className="content">
                 <h2> Login </h2>
                 <form action="signinAdmin" encType="multipart/form-data" method="post">
-                    <label>Usuario:</label>
-                    <input type="text" name="username" required="required"/>
-                    <label>Password:</label>
-                    <input type="password" name="password" required="required"/>
+                <div className="row">
+                        <label>Usuario:</label>
+                        <input type="text" name="username" required="required"/>
+                    </div>
+                    <div className="row">
+                        <label>Password:</label>
+                        <input type="password" name="password" required="required"  className="input-password"/>
+                    </div>
                     <input type="submit"/>
                 </form>
                 <form action="signup" method="get">
