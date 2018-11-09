@@ -23,7 +23,7 @@ class DefaultLayout extends React.Component {
                
                 {/* <a href="/logout">logout</a> */}
 
-                <form action="logout" method="get">
+                <form action="http://localhost:3000/logout" method="get">
                     <input type="submit" value="logout" className="logout"/>
                 </form>
             </header>

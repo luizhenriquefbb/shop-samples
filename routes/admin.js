@@ -7,20 +7,20 @@ var router = express.Router();
 router.get('/', function(req, res, next){
 
   //Verificar, pela sessão, se o usuario esta logado
-  verifySession(req, res);
+  verifySession(req, res, next);
 
   if(req.session.isAdmin)
     res.redirect('admin/home');
   else {
-    res.send('<script> alert("Você não é administrador") </script>');    
+    // res.send('<script> alert("Você não é administrador") </script>');    
   }
   
 });
 
 //Rota quando o administrador estiver logado
-router.get('/home', function(req, res){
+router.get('/home', function(req, res, next){
 
-  verifySession(req, res);
+  verifySession(req, res, next);
 
   //Encontrar todas as categorias e da join com a tabela de produtos
 	models.Category.findAll({
@@ -74,7 +74,7 @@ router.get('/logout', function (req, res) {
       req.session.username = "";
       req.session.isAdmin = false;
       req.session.logado = false;
-      res.redirect('home');
+      res.redirect('/admin/login');
       
   }
 });

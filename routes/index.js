@@ -66,7 +66,7 @@ router.get('/logout', function (req, res) {
         req.session.username = "";
         req.session.isAdmin = false;
         req.session.logado = false;
-        res.redirect('home');
+        res.redirect('/login');
         
     }
 
@@ -155,7 +155,8 @@ router.get('/categories/:category_id',function(req, res, next) {
 function verifySession(req, res, next) {
     if(req.session == undefined || !req.session.logado) {
       res.redirect('/login');
-      next();
+      if (next && {}.toString.call(next) === '[object Function]')
+        next();
     }
 }
 
